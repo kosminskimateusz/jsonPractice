@@ -6,7 +6,8 @@ namespace JsonPractice
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            JsonManager manager = new JsonManager();
+            manager.AddOverrideJsonFile();
         }
     }
 }
