@@ -8,7 +8,7 @@ class JsonManager
     private string folder = @".\json\";
     public void AddOverrideJsonFile(string name, string lastName, int age)
     {
-        People person = new People(name, lastName, age);
+        Person person = new Person(name, lastName, age);
         string path = folder + person.Name.ToLower() + person.LastName + ".json";
         // JsonSerializerOptions ładnie formatuje kod w pliku JSON
         var options = new JsonSerializerOptions
@@ -34,7 +34,7 @@ class JsonManager
         }
 
         var jsonBytes = File.ReadAllBytes(path);
-        var personX = JsonSerializer.Deserialize<People>(jsonBytes);
+        var personX = JsonSerializer.Deserialize<Person>(jsonBytes);
 
         Console.WriteLine($"Obiekt z pliku JSON:\n\tName:\t\t{personX.Name}\n\tLast Name:\t{personX.LastName}\n\tAge:\t\t{personX.Age}");
 
@@ -63,10 +63,10 @@ class JsonManager
     public void ReadJsonFile(byte[] jsonUtf8Bytes)
     {
         var readOnlySpan = new ReadOnlySpan<byte>(jsonUtf8Bytes);
-        var person1 = JsonSerializer.Deserialize<People>(readOnlySpan);
+        var person1 = JsonSerializer.Deserialize<Person>(readOnlySpan);
         Console.WriteLine(person1.LastName);
         var utf8Reader = new Utf8JsonReader(jsonUtf8Bytes);
-        var person2 = JsonSerializer.Deserialize<People>(ref utf8Reader);
+        var person2 = JsonSerializer.Deserialize<Person>(ref utf8Reader);
         Console.WriteLine(person2.LastName);
     }
 }
